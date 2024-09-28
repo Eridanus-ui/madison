@@ -4,17 +4,15 @@ import toast from "react-hot-toast";
 export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    phoneNumber: "0123456789",
-    idNumber: "123456789",
-    firstName: "John",
-    secondName: "Doe",
+    phoneNumber: "",
+    idNumber: "",
+    firstName: "",
+    secondName: "",
   });
 
   const handleSubmit = async () => {
     try {
       setSubmitting(true);
-
-      console.log(formData);
 
       const response = await fetch("/api/user/signin", {
         method: "POST",
@@ -25,18 +23,17 @@ export default function LoginPage() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error);
       }
 
       const responseData = await response.json();
-      console.log("Response data:", responseData);
 
-      setSubmitting(false);
-      return responseData; // This ensures the promise resolves successfully
+      return responseData;
     } catch (error) {
+      throw error;
+    } finally {
       setSubmitting(false);
-      console.error("Error during form submission:", error);
-      throw error; // This ensures the promise fails
     }
   };
 
@@ -47,7 +44,8 @@ export default function LoginPage() {
       {
         loading: "Loading...",
         success: "Successfully logged in!",
-        error: "Login failed. Please try again.",
+        error: (error) =>
+          error.message || "Error when fetching payment details!",
       },
       {
         id: "loginToast",
