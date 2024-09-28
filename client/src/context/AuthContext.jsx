@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setAuth(token); // set the token from localStorage
+      setAuth(token);
     }
   }, []);
 
@@ -19,4 +19,8 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+const useAuthVar = () => useContext(AuthContext);
+
+export const useAuth = () => {
+  return useAuthVar;
+};
