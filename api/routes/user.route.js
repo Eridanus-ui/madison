@@ -4,6 +4,6 @@ import { fetchProducts } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.get("/:id", verifyToken, fetchProducts);
+router.post("/signin", fetchProducts);
 
 export default router

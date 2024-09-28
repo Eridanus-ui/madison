@@ -2,7 +2,8 @@ import { User } from "../model/user.model.js";
 
 // Function to get the policies of a user
 export const fetchProducts = async (req, res) => {
-    const idNumber = req.params.idNumber;
+    const idNumber = req.body.idNumber;
+    console.log(idNumber);
     try {
         const user = await User.find({ idNumber });
         res.json(user);
