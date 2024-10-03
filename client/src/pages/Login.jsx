@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
+import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
@@ -9,6 +12,33 @@ export default function LoginPage() {
     firstName: "John",
     secondName: "Doe",
   });
+
+  const { signIn, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verify token on initial load
+    fetch("api/user/verifyToken", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Token verification failed");
+        }
+      })
+      .then((data) => {
+        signIn(data.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Token verification error:", error);
+        Cookies.remove("access_token");
+      })
+      .finally(() => {});
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -28,7 +58,9 @@ export default function LoginPage() {
       }
 
       const responseData = await response.json();
-      console.log(responseData);
+      signIn(responseData.user);
+      navigate("/");
+
       return responseData;
     } catch (error) {
       throw error;
@@ -62,83 +94,86 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center my-4 h-[100vh]">
-      <form
-        onSubmit={handleFormSubmit}
-        className="bg-white p-6 rounded shadow-lg w-full max-w-sm"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center font-yantramanav">
-          Login
-        </h2>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2 text-start">
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleInputChange}
-            required
-            className="block w-full p-2 border font-muktaVaani border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your phone number"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2 text-start">
-            ID Number
-          </label>
-          <input
-            type="text"
-            name="idNumber"
-            value={formData.idNumber}
-            onChange={handleInputChange}
-            required
-            className="block w-full p-2 border font-muktaVaani border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your ID number"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2 text-start">
-            First Name
-          </label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-            required
-            className="block w-full p-2 border font-muktaVaani border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your first name"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2 text-start">
-            Second Name
-          </label>
-          <input
-            type="text"
-            name="secondName"
-            value={formData.secondName}
-            onChange={handleInputChange}
-            required
-            className="block w-full p-2 border font-muktaVaani border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter your second name"
-          />
-        </div>
-
-        <button
-          disabled={submitting}
-          type="submit"
-          className="w-full bg-blue-500 text-white font-semibold py-2 font-yantramanav rounded hover:bg-blue-600 transition duration-200"
+    <div className="">
+      <Header />
+      <div className="flex items-center justify-center my-4">
+        <form
+          onSubmit={handleFormSubmit}
+          className="bg-white p-6 rounded shadow-lg w-full max-w-sm"
         >
-          {submitting ? "Submitting..." : "Login"}
-        </button>
-      </form>
+          <h2 className="text-2xl font-bold mb-6 text-center font-yantramanav">
+            Login
+          </h2>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2 text-start">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+              required
+              className="block w-full p-2 border font-muktaVaani border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your phone number"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2 text-start">
+              ID Number
+            </label>
+            <input
+              type="text"
+              name="idNumber"
+              value={formData.idNumber}
+              onChange={handleInputChange}
+              required
+              className="block w-full p-2 border font-muktaVaani border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your ID number"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2 text-start">
+              First Name
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              required
+              className="block w-full p-2 border font-muktaVaani border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your first name"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2 text-start">
+              Second Name
+            </label>
+            <input
+              type="text"
+              name="secondName"
+              value={formData.secondName}
+              onChange={handleInputChange}
+              required
+              className="block w-full p-2 border font-muktaVaani border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your second name"
+            />
+          </div>
+
+          <button
+            disabled={submitting}
+            type="submit"
+            className="w-full bg-blue-500 text-white font-semibold py-2 font-yantramanav rounded hover:bg-blue-600 transition duration-200"
+          >
+            {submitting ? "Submitting..." : "Login"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

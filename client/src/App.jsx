@@ -11,7 +11,6 @@ function App() {
   return (
     <>
       <Router>
-        <Header />
         <Toaster toastOptions={{ className: "font-yantramanav" }} />
         <Routes>
           <Route path="/sign-in" element={<LoginPage />} />
