@@ -1,5 +1,7 @@
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Profile() {
-  return <div>Profile</div>;
+  const { user } = useAuth();
+  return <div className="">Hello, {user.firstName}.</div>;
 }

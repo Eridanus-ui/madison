@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
@@ -18,26 +19,25 @@ export default function LoginPage() {
 
   useEffect(() => {
     // Verify token on initial load
-    fetch("api/user/verifyToken", {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Token verification failed");
+    const persistentSignIn = async () => {
+      try {
+        const res = await fetch("api/user/verifyToken", {
+          method: "GET",
+          credentials: "include",
+        });
+        const response = await res.json();
+        if (!res.ok) {
+          console.log(response.message);
+          return response.message;
         }
-      })
-      .then((data) => {
-        signIn(data.user);
+        signIn(response.user);
         navigate("/");
-      })
-      .catch((error) => {
-        console.error("Token verification error:", error);
-        Cookies.remove("access_token");
-      })
-      .finally(() => {});
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    persistentSignIn();
   }, []);
 
   const handleSubmit = async () => {
