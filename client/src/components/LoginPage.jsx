@@ -4,10 +4,10 @@ import toast from "react-hot-toast";
 export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    phoneNumber: "",
-    idNumber: "",
-    firstName: "",
-    secondName: "",
+    phoneNumber: "0123456789",
+    idNumber: "123456789",
+    firstName: "John",
+    secondName: "Doe",
   });
 
   const handleSubmit = async () => {

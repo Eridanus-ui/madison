@@ -5,7 +5,7 @@ export default function Header() {
     <>
       <div className="flex justify-center">
         <img
-          src="https://www.memorialkenya.com/wp-content/uploads/2020/06/Madison-Insurance-Company-Kenya.png"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsH-wPqHSzG-q3gw8ItGu8kV8GdfoMVAx-qQ&s"
           alt=""
           className="w-72"
         />
