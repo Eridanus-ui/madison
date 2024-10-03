@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-//User schema (existing users with policies)
+// User schema (existing users with policies)
 const userSchema = new mongoose.Schema({
     idNumber: { type: String, required: true, unique: true },
     name: { type: String, required: true }, // User's name

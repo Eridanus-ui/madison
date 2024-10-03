@@ -9,33 +9,28 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = Cookies.get("access_token");
-
-    if (!token) {
-      fetch("api/user/verifyToken", {
-        method: "GET",
-        credentials: "include",
+    fetch("api/user/verifyToken", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json(); // Parse the JSON response
+        } else {
+          throw new Error("Token verification failed");
+        }
       })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Token verification failed");
-          }
-        })
-        .then((data) => {
-          setAuth(data.userId);
-        })
-        .catch(() => {
-          Cookies.remove("access_token");
-          setAuth(null);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
+      .then((data) => {
+        setUser(data.user); // Access userId from the JSON response
+      })
+      .catch((error) => {
+        console.error("Token verification error:", error); // Log the error
+        Cookies.remove("access_token");
+        setAuth(null);
+      })
+      .finally(() => {
+        setLoading(false); // Ensure loading is false regardless of outcome
+      });
   }, []);
 
   if (loading) {
@@ -43,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ auth, setAuth, user }}>
       {children}
     </AuthContext.Provider>
   );
