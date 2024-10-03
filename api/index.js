@@ -4,6 +4,7 @@ import path from "path";
 import cors from "cors";
 import mongoose from "mongoose";
 import userRouter from "./routes/user.route.js"
+import cookieParser from "cookie-parser";
 
 // _Initialize dotenv
 dotenv.config();
@@ -33,6 +34,9 @@ app.use(express.json());
 app.listen(3000, () => {
   console.log("Server is running on port at http://localhost:3000");
 });
+
+// Middleware to parse cookies
+app.use(cookieParser());
 
 // _import the routes
 app.use("/api/user", userRouter);
