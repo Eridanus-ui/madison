@@ -9,7 +9,7 @@ export default function Profile() {
       <div className="mb-4 text-xl  font-yantramanav">
         Hello, {user.firstName} {user.secondName}.
       </div>
-      <div className="font-muktaVaani flex justify-start mb-3 text-blue-600 ml-1">
+      <div className="font-muktaVaani flex sm:justify-start md:justify-center mb-3 text-blue-600 ml-1">
         You've consented to the following policies:
       </div>
       <PolicyList />
