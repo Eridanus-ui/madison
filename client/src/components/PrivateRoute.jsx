@@ -3,19 +3,16 @@ import { useAuth } from "../context/AuthContext";
 import Cookies from "js-cookie";
 
 export default function PrivateRoute() {
-  // const authorized = useRef(false);
-  const authorizedBool = Cookies.get("logged_in");
-  const token = Cookies.get("user");
-
   const { loading } = useAuth();
+
+  const authorizedBool = Cookies.get("logged_in") === "true";
+  const token = Cookies.get("user");
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (authorizedBool === false && !token) {
-    console.log(authorizedBool);
-
+  if (!authorizedBool || !token) {
     return <Navigate to="/sign-in" />;
   }
 
