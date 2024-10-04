@@ -38,9 +38,8 @@ export const fetchProducts = async (req, res) => {
 
         res
             .cookie("access_token", token, {
-                httpOnly: true,
+                httpOnly: false,
                 secure: process.env.NODE_ENV === "production",
-                sameSite: "strict",
                 maxAge: 3600000
             })
             .status(200)

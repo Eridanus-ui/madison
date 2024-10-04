@@ -15,11 +15,15 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const signOut = () => {
-    setUser(null);
-    setAuth(false);
-    Cookies.remove("access_token");
-    setLoading(false);
+  const signOut = async () => {
+    try {
+      setUser(null);
+      setAuth(false);
+      Cookies.remove("access_token");
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

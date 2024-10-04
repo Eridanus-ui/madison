@@ -1,15 +1,11 @@
 import React from "react";
 import { CircleCheckBig } from "lucide-react";
 import { AiOutlineDownload, AiOutlineEye } from "react-icons/ai";
-// import pdfSvg from "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGAA4Wd4bco5Xv33GasXrnDdQT5OFXwa3HUQ&s";
 
 export default function PolicyCard({ policy }) {
   return (
     <div className="p-4 bg-white shadow rounded-lg max-w-sm mx-auto border border-gray-200">
       <div className="flex items-start">
-        {/* <div className="w-40">
-          <img src={pdfSvg} alt="" srcset="" className="w-40" />
-        </div> */}
         {/* Title and Description */}
         <div className="ml-3 flex flex-col justify-between relative">
           <div className="bg-green-500 w-4 h-4 rounded-full absolute right-0">
