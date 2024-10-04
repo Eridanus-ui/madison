@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
@@ -14,34 +13,33 @@ export default function LoginPage() {
     secondName: "Doe",
   });
 
-  const { signIn, signOut, setLoading } = useAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Verify token on initial load
-    const persistentSignIn = async () => {
-      try {
-        const res = await fetch("api/user/verifyToken", {
-          method: "GET",
-          credentials: "include",
-        });
-        const response = await res.json();
-        if (!res.ok) {
-          console.log(response.message);
-          return response.message;
-        }
-        signIn(response.user);
-        setLoading(false);
-        console.log(response.user);
-        navigate("/");
-      } catch (error) {
-        console.log(error);
-      } finally {
-      }
-    };
+  //   // Verify token on initial load
+  //   const persistentSignIn = async () => {
+  //     try {
+  //       const res = await fetch("api/user/verifyToken", {
+  //         method: "GET",
+  //         credentials: "include",
+  //       });
+  //       const response = await res.json();
+  //       if (!res.ok) {
+  //         console.log(response.message);
+  //         return response.message;
+  //       }
+  //       signIn(response.user);
+  //       setLoading(false);
+  //       console.log(response.user);
+  //       navigate("/");
+  //     } catch (error) {
+  //       console.log(error);
+  //     } finally {
+  //     }
+  //   };
 
-    persistentSignIn();
-  }, []);
+  //   persistentSignIn();
+  // }, []);
 
   const handleSubmit = async () => {
     try {
@@ -63,7 +61,7 @@ export default function LoginPage() {
       const responseData = await response.json();
       signIn(responseData.user);
       navigate("/");
-
+      console.log(responseData.user);
       return responseData;
     } catch (error) {
       throw error;

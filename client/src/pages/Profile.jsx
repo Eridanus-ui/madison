@@ -8,7 +8,7 @@ import { LogOut } from "lucide-react";
 export default function Profile() {
   const navigate = useNavigate();
 
-  const { user, signOut } = useAuth();
+  const { activeUser, signOut } = useAuth();
   const handleSignOut = async () => {
     Cookies.remove("access_token");
     await signOut();
@@ -18,9 +18,9 @@ export default function Profile() {
   return (
     <div className="">
       <div className="mb-4 text-xl  font-yantramanav">
-        Hello, {user.firstName} {user.secondName}.
+        Hello, {activeUser.current.firstName} {activeUser.current.secondName}.
       </div>
-      <div className="font-muktaVaani flex sm:justify-start md:justify-center mb-3 text-blue-600 ml-1">
+      <div className="font-muktaVaani flex justify-center mb-3 text-blue-600 ml-1">
         You've consented to the following policies:
       </div>
       <PolicyList />

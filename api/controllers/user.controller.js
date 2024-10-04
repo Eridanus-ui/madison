@@ -13,12 +13,12 @@ const fetchUserById = async (idNumber) => {
 
 // Function to generate JWT for a user
 const generateToken = (user) => {
-    return jwt.sign({ id: user._id, idNumber: user.idNumber, phoneNumber: user.phoneNumber }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    return jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 
 // Main function to handle user authentication and product fetching
 export const fetchProducts = async (req, res) => {
-    console.log(req.user);
+
     const { idNumber, phoneNumber } = req.body;
 
 
@@ -57,8 +57,6 @@ export const fetchProducts = async (req, res) => {
 export const persistentSignIn = async (req, res) => {
 
     const idNumber = req.user.idNumber;
-
-    // console.log(idNumber);
 
     try {
         const validUser = await fetchUserById(idNumber);

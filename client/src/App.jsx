@@ -9,6 +9,7 @@ import Spinner from "./components/Spinner";
 function App() {
   const Home = lazy(() => import("./pages/Profile"));
   const SignIn = lazy(() => import("./pages/Login"));
+  const Policy = lazy(() => import("./pages/Policy"));
 
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route element={<PrivateRoute />}>
               <Route path="/" element={<Home />}></Route>
+              <Route path="/policy" element={<Policy />} />
             </Route>
           </Routes>
         </Suspense>
