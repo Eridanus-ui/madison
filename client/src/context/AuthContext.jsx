@@ -11,19 +11,22 @@ export const AuthProvider = ({ children }) => {
   let user = activeUser.current;
 
   const checkAuthStatus = () => {
-    const token = Cookies.get("access_token");
+    const token = Cookies.get("user");
     if (token) {
       console.log("Token:", token);
-      try {
-        const decodedUser = jwtDecode(token);
-        console.log("Decoded User:", decodedUser.user);
-        auth.current = true;
-        activeUser.current = decodedUser.user;
-        Cookies.set("logged_in", true, { expires: 1 / 24 });
-      } catch (error) {
-        console.error("Failed to decode token:", error);
-        signOut();
-      }
+      const authorizedUser = JSON.parse(token);
+      activeUser.current = authorizedUser;
+
+      // try {
+      //   const decodedUser = jwtDecode(token);
+      //   console.log("Decoded User:", decodedUser.user);
+      //   auth.current = true;
+      //   activeUser.current = decodedUser.user;
+      //   Cookies.set("logged_in", true, { expires: 1 / 24 });
+      // } catch (error) {
+      //   console.error("Failed to decode token:", error);
+      //   signOut();
+      // }
     } else {
       signOut();
     }
@@ -40,7 +43,8 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     activeUser.current = user;
     auth.current = true;
-    Cookies.set("logged_in", true);
+    Cookies.set("user", JSON.stringify(user));
+    Cookies.set("logged_in", true, { expires: 1 / 24 });
     setLoading(false);
   };
 
@@ -49,6 +53,7 @@ export const AuthProvider = ({ children }) => {
       activeUser.current = null;
       auth.current = false;
       Cookies.remove("access_token");
+      Cookies.remove("user");
       Cookies.set("logged_in", false);
       setLoading(false);
     } catch (e) {

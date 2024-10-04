@@ -7,7 +7,7 @@ import { set } from "mongoose";
 export default function PrivateRoute() {
   // const authorized = useRef(false);
   const authorizedBool = Cookies.get("logged_in");
-  const token = Cookies.get("access_token");
+  const token = Cookies.get("user");
 
   const { loading } = useAuth();
 
@@ -15,7 +15,7 @@ export default function PrivateRoute() {
     return <div>Loading...</div>;
   }
 
-  if (authorizedBool === false || !token) {
+  if (authorizedBool === false && !token) {
     console.log(authorizedBool);
 
     return <Navigate to="/sign-in" />;
