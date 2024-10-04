@@ -14,7 +14,7 @@ export default function LoginPage() {
     secondName: "Doe",
   });
 
-  const { signIn, signOut } = useAuth();
+  const { signIn, signOut, setLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,9 +31,12 @@ export default function LoginPage() {
           return response.message;
         }
         signIn(response.user);
+        setLoading(false);
+        console.log(response.user);
         navigate("/");
       } catch (error) {
         console.log(error);
+      } finally {
       }
     };
 
