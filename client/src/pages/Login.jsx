@@ -76,7 +76,7 @@ export default function LoginPage() {
     toast.promise(
       handleSubmit(),
       {
-        loading: "Loading...",
+        loading: "Just a moment...",
         success: "Successfully logged in!",
         error: (error) => error.message || "Error when fetching user!",
       },
