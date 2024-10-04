@@ -54,7 +54,7 @@ export const fetchProducts = async (req, res) => {
 
 
 // Persistent sign-in function
-export const persistentSignIn = async (req, res) => {
+export const updateUser = async (req, res) => {
 
     const idNumber = req.user.idNumber;
 

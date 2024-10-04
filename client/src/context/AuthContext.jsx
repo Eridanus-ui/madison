@@ -13,20 +13,8 @@ export const AuthProvider = ({ children }) => {
   const checkAuthStatus = () => {
     const token = Cookies.get("user");
     if (token) {
-      console.log("Token:", token);
       const authorizedUser = JSON.parse(token);
       activeUser.current = authorizedUser;
-
-      // try {
-      //   const decodedUser = jwtDecode(token);
-      //   console.log("Decoded User:", decodedUser.user);
-      //   auth.current = true;
-      //   activeUser.current = decodedUser.user;
-      //   Cookies.set("logged_in", true, { expires: 1 / 24 });
-      // } catch (error) {
-      //   console.error("Failed to decode token:", error);
-      //   signOut();
-      // }
     } else {
       signOut();
     }
@@ -39,7 +27,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signIn = (user) => {
-    console.log(user);
     setLoading(true);
     activeUser.current = user;
     auth.current = true;

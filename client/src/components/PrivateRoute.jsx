@@ -1,8 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Cookies from "js-cookie";
-import { useEffect, useRef, useState } from "react";
-import { set } from "mongoose";
 
 export default function PrivateRoute() {
   // const authorized = useRef(false);

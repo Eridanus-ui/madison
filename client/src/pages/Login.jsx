@@ -55,13 +55,14 @@ export default function LoginPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error);
+        if (response.status === 500) {
+          throw Error("Server Error!!");
+        }
       }
 
       const responseData = await response.json();
       signIn(responseData.user);
       navigate("/");
-      console.log(responseData.user);
       return responseData;
     } catch (error) {
       throw error;
@@ -77,8 +78,7 @@ export default function LoginPage() {
       {
         loading: "Loading...",
         success: "Successfully logged in!",
-        error: (error) =>
-          error.message || "Error when fetching payment details!",
+        error: (error) => error.message || "Error when fetching user!",
       },
       {
         id: "loginToast",
