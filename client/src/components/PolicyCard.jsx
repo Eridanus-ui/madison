@@ -1,8 +1,15 @@
 import React from "react";
 import { CircleCheckBig } from "lucide-react";
 import { AiOutlineDownload, AiOutlineEye } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function PolicyCard({ policy }) {
+  const navigate = useNavigate();
+
+  const handleViewPress = () => {
+    navigate("/policy");
+  };
+
   return (
     <div className="p-4 bg-white shadow rounded-lg max-w-sm mx-auto border border-gray-200">
       <div className="flex items-start">
@@ -29,7 +36,10 @@ export default function PolicyCard({ policy }) {
         </button>
 
         {/* View Button */}
-        <button className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg shadow hover:bg-gray-200 transition">
+        <button
+          onClick={handleViewPress}
+          className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg shadow hover:bg-gray-200 transition"
+        >
           <AiOutlineEye className="mr-2 w-5 h-5" />
           <span className="font-imprima">View</span>
         </button>

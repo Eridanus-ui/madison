@@ -58,6 +58,9 @@ export default function LoginPage() {
         if (response.status === 500) {
           throw Error("Server Error!!");
         }
+
+        console.log(errorData);
+        throw Error(errorData.error);
       }
 
       const responseData = await response.json();
