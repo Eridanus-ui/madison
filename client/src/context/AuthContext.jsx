@@ -4,11 +4,21 @@ import { Drawer } from "vaul";
 
 const AuthContext = createContext();
 
+const InitialComponent = () => {
+  return (
+    <>
+      <div className="">You didn't select a component</div>
+    </>
+  );
+};
+
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [ActiveCardComponent, setActiveCardComponent] = useState(
+    () => InitialComponent
+  );
 
-  const currentPolicy = useRef(null);
   const auth = useRef(false);
   const activeUser = useRef(null);
   let user = activeUser.current;
@@ -51,7 +61,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const toggleDrawer = () => {
+  const toggleDrawer = (Component) => {
+    setActiveCardComponent(() => Component);
     setIsDrawerOpen((prev) => !prev);
   };
 
@@ -68,18 +79,29 @@ export const AuthProvider = ({ children }) => {
         toggleDrawer,
       }}
     >
-      <Drawer.Root open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+      <Drawer.Root
+        open={isDrawerOpen}
+        onOpenChange={setIsDrawerOpen}
+        handleOnly={true}
+      >
         <Drawer.Portal>
           <Drawer.Title className="font-medium mb-4 text-gray-900"></Drawer.Title>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-          <Drawer.Content className="bg-gray-100 h-fit fixed bottom-0 left-0 right-0 outline-none">
-            <div className="flex justify-center mb-4">
-              <button
-                className="rounded-md mt-4 bg-gray-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                onClick={() => setIsDrawerOpen(false)}
-              >
-                Close
-              </button>
+          <Drawer.Content className="bg-gray-100 h-fit fixed bottom-0 left-0 right-0 outline-none rounded-lg my-4">
+            <div className="">
+              <Drawer.Handle className="my-4" />
+              <div className="p-4 bg-gray-200 rounded-t-[10px] flex-1 mx-2">
+                {<ActiveCardComponent />}
+              </div>
+
+              <div className="flex justify-center mb-4">
+                <button
+                  className="rounded-md mt-4 bg-gray-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                  onClick={() => setIsDrawerOpen(false)}
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </Drawer.Content>
         </Drawer.Portal>

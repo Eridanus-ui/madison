@@ -3,13 +3,13 @@ import { CircleCheckBig } from "lucide-react";
 import { AiOutlineDownload, AiOutlineEye } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
 
-export default function PolicyCard({ policy }) {
+export default function PolicyCard({ policy, component }) {
   const { toggleDrawer } = useAuth();
 
   const ref = useRef();
 
-  const handleViewPress = (ref) => {
-    toggleDrawer();
+  const handleViewPress = () => {
+    toggleDrawer(component);
   };
 
   return (
