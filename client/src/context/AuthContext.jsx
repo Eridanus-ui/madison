@@ -87,13 +87,10 @@ export const AuthProvider = ({ children }) => {
         <Drawer.Portal>
           <Drawer.Title className="font-medium mb-4 text-gray-900"></Drawer.Title>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-          <Drawer.Content className="bg-gray-100 h-fit fixed bottom-0 left-0 right-0 outline-none rounded-lg my-4">
+          <Drawer.Content className="bg-cyan-50 h-fit fixed bottom-0 left-0 right-0 outline-none rounded-t-lg my-4">
             <div className="">
               <Drawer.Handle className="my-4" />
-              <div className="p-4 bg-gray-200 rounded-t-[10px] flex-1 mx-2">
-                {<ActiveCardComponent />}
-              </div>
-
+              <div className="mx-2">{<ActiveCardComponent />}</div>
               <div className="flex justify-center mb-4">
                 <button
                   className="rounded-md mt-4 bg-gray-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"

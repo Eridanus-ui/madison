@@ -100,7 +100,7 @@ export default function LoginPage() {
   return (
     <div className="">
       <Header />
-      <div className="flex items-center justify-center my-4">
+      <div className="flex items-center justify-center mb-4">
         <form
           onSubmit={handleFormSubmit}
           className="bg-white p-6 rounded shadow-lg w-full max-w-sm"

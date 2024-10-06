@@ -9,6 +9,89 @@ body {
   background-color: aliceblue;
 }
 
-label {
+label,
+p,
+li {
   font-family: "Imprima";
+}
+
+strong,
+h2 {
+  font-family: "Mukta Vaani";
+}
+
+h3,
+h1 {
+  font-family: "Yantramanav";
+}
+
+tom Scrollbar Styles */
+
+/* Base styles for the scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+/* WebKit browsers (Chrome, Safari, newer versions of Edge) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #f7fafc;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e0;
+  border-radius: 10px;
+  border: 2px solid #f7fafc;
+  transition: background-color 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #a0aec0;
+}
+
+/* For Firefox */
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+/* For Internet Explorer */
+.custom-scrollbar {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+/* Styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  .custom-scrollbar {
+    scrollbar-color: #4a5568 #1a202c;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #1a202c;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #4a5568;
+    border: 2px solid #1a202c;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #718096;
+  }
+}
+
+/* Optional: Hide scrollbar when not hovering */
+.custom-scrollbar.hide-scrollbar:not(:hover) {
+  scrollbar-width: none;
+}
+
+.custom-scrollbar.hide-scrollbar:not(:hover)::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
