@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import { CircleCheckBig } from "lucide-react";
 import { AiOutlineDownload, AiOutlineEye } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function PolicyCard({ policy }) {
-  const navigate = useNavigate();
+  const { toggleDrawer } = useAuth();
 
-  const handleViewPress = () => {
-    navigate("/policy");
+  const ref = useRef();
+
+  const handleViewPress = (ref) => {
+    toggleDrawer();
   };
 
   return (
-    <div className="p-4 bg-white shadow rounded-lg max-w-sm mx-auto border border-gray-200">
+    <div
+      ref={ref}
+      className="p-4 bg-white shadow rounded-lg max-w-sm mx-auto border border-gray-200"
+    >
       <div className="flex items-start">
         {/* Title and Description */}
         <div className="ml-3 flex flex-col justify-between relative">

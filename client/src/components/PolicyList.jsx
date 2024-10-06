@@ -1,5 +1,5 @@
 import React from "react";
-import insurancePolicies from "../../utils/data";
+import insurancePolicies from "../utils/data";
 import PolicyCard from "./PolicyCard";
 
 export default function PolicyList() {

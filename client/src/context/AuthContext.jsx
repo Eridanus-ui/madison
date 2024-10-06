@@ -1,11 +1,14 @@
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
+import { Drawer } from "vaul";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const currentPolicy = useRef(null);
   const auth = useRef(false);
   const activeUser = useRef(null);
   let user = activeUser.current;
@@ -48,10 +51,39 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const toggleDrawer = () => {
+    setIsDrawerOpen((prev) => !prev);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ auth, activeUser, signIn, signOut, loading, setLoading, user }}
+      value={{
+        auth,
+        activeUser,
+        signIn,
+        signOut,
+        loading,
+        setLoading,
+        user,
+        toggleDrawer,
+      }}
     >
+      <Drawer.Root open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+        <Drawer.Portal>
+          <Drawer.Title className="font-medium mb-4 text-gray-900"></Drawer.Title>
+          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+          <Drawer.Content className="bg-gray-100 h-fit fixed bottom-0 left-0 right-0 outline-none">
+            <div className="flex justify-center mb-4">
+              <button
+                className="rounded-md mt-4 bg-gray-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
       {children}
     </AuthContext.Provider>
   );
