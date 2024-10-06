@@ -61,6 +61,10 @@ tom Scrollbar Styles */
   scrollbar-color: #cbd5e0 #f7fafc;
 }
 
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  scrollbar-width: thin;
+}
+
 /* For Internet Explorer */
 .custom-scrollbar {
   -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -79,6 +83,7 @@ tom Scrollbar Styles */
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: #4a5568;
     border: 2px solid #1a202c;
+    /* scrollbar-width: thin; */
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {

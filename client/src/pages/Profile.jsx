@@ -25,6 +25,10 @@ export default function Profile() {
       </div>
       <PolicyList />
 
+      <div className="font-muktaVaani flex justify-center my-3 text-red-600 ml-1">
+        Pending policies:
+      </div>
+
       {/* Sign-Out Button */}
       <div className="flex justify-center py-4">
         <button
