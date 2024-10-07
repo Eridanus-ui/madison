@@ -7,17 +7,17 @@ export default function AutomotivePolicy() {
       {/* Header */}
       <header className="mb-6 md:mb-8 text-center">
         <h1 className="text-2xl md:text-3xl font-bold text-blue-900 mb-2">
-          Madison Insurance
+          Madison Insurance.
         </h1>
         <h2 className="text-md md:text-xl text-gray-600">
-          Comprehensive Automotive Insurance Policy
+          Comprehensive Automotive Insurance Policy.
         </h2>
       </header>
 
       {/* Policy Details */}
       <section className="mb-6 md:mb-8">
         <h3 className="text-xl md:text-2xl font-semibold text-blue-700 mb-4 flex items-center">
-          <Car className="mr-2 w-6 h-6 text-blue-700" /> Policy Details
+          <Car className="mr-2 w-6 h-6 text-blue-700" /> Policy Details.
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-100 p-4 rounded-md">
           <div>
@@ -71,7 +71,7 @@ export default function AutomotivePolicy() {
       <section className="mb-6 md:mb-8">
         <h3 className="text-xl md:text-2xl font-semibold text-blue-700 mb-4 flex items-center">
           <FileText className="mr-2 w-6 h-6 text-blue-700" /> Terms and
-          Conditions
+          Conditions.
         </h3>
         <div className="space-y-4 text-sm md:text-base">
           <p>

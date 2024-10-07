@@ -33,17 +33,17 @@ export default function PolicyCard({ policy, component }) {
       </div>
 
       {/* Buttons Section */}
-      <div className="mt-4 flex justify-between">
+      <div className="mt-4 flex justify-center">
         {/* Download Button */}
-        <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+        {/* <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
           <AiOutlineDownload className="mr-2 w-5 h-5" />
           <span className="font-imprima">Download</span>
-        </button>
+        </button> */}
 
         {/* View Button */}
         <button
           onClick={handleViewPress}
-          className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg shadow hover:bg-gray-200 transition"
+          className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
         >
           <AiOutlineEye className="mr-2 w-5 h-5" />
           <span className="font-imprima">View</span>
